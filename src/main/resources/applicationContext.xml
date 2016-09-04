@@ -1,0 +1,30 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+	xsi:schemaLocation="http://www.springframework.org/schema/beans classpath:spring-beans-3.0.xsd"
+	default-lazy-init="false">
+
+	<bean id="freeMarkerConfigurer"
+		class="org.springframework.web.servlet.view.freemarker.FreeMarkerConfigurer">
+		<property name="templateLoaderPath" value="classpath:templates" />
+		<property name="freemarkerSettings">
+			<props>
+				<prop key="template_update_delay">1800</prop>
+				<prop key="default_encoding">UTF-8</prop>
+				<prop key="locale">zh_CN</prop>
+			</props>
+		</property>
+	</bean>
+
+    <bean id="mailSender" class="com.talkingdata.utils.MailSender">
+		<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer"/>
+    </bean>
+
+	<bean id="mailGeneralSender" class="com.talkingdata.utils.MailSenderGeneral">
+		<property name="freeMarkerConfigurer" ref="freeMarkerConfigurer"/>
+	</bean>
+	<!-- job的配置结束 -->
+	<bean id="mainFunction" class="com.talkingdata.java.Main" >
+			</bean>
+
+</beans>
